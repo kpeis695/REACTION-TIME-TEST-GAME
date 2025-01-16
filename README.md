@@ -14,7 +14,6 @@ Your reaction time in milliseconds (ms) will be displayed.
 You will get three tries, and at the end, the average reaction time of all three attempts will be displayed.
 Project Structure
 The repository contains the following files:
-
 index.html: The main HTML file that contains the structure of the web page.
 style.css: The CSS file that defines the layout and design of the page.
 main.js: The JavaScript file that handles the game logic, including calculating reaction time and displaying the results.
