@@ -11,7 +11,7 @@ let timeNow;
 let waitingForStart;
 let waitingForGreen;
 let scores;
-
+  
 const init = () => {
     greenDisplayed = false;
     waitingForStart = false;
