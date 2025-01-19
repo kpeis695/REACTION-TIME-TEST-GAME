@@ -4,7 +4,7 @@ This project is a simple Reaction Time Test Game where users can test how fast t
   hl
 Features
 Simple and intuitive user interface.
-Reaction time is measured in milliseconds (ms).
+Reaction time is measured in milliseconds (ms). vv
 Average reaction time is calculated and displayed after three attempts.
 Built using HTML, CSS, and JavaScript.,d
 How to Play
