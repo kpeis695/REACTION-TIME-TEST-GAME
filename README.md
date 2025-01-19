@@ -12,7 +12,7 @@ The game will display a random delay before the background color changes to gree
 Wait for the screen to turn green, then click as fast as possible.
 Your reaction time in milliseconds (ms) will be displayed.
 You will get three tries, and at the end, the average reaction time of all three attempts will be displayed.
-Project Structure
+Project Structure ,,
 The repository contains the following files:
 index.html: The main HTML file that contains the structure of the web page.
 style.css: The CSS file that defines the layout and design of the page.
