@@ -20,4 +20,4 @@ main.js: The JavaScript file that handles the game logic, including calculating 
 Future Improvements
 Add more levels with increasing difficulty.
 Allow users to share their reaction times on social media.
-Implement a leaderboard to compare scores with other players.
+Implement a leaderboard to compare scores with other players. cc
