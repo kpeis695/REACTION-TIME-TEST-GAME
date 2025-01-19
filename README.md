@@ -1,7 +1,7 @@
-Reaction Time Test Game
+ Reaction Time Test Game
 Overview
 This project is a simple Reaction Time Test Game where users can test how fast they respond to visual stimuli. The user must wait for the screen to turn green and then click as quickly as possible. The game measures the user's reaction time in milliseconds and provides an average reaction time after three attempts.
-
+  
 Features
 Simple and intuitive user interface.
 Reaction time is measured in milliseconds (ms).
