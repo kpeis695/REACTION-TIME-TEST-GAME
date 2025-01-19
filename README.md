@@ -6,7 +6,7 @@ Features
 Simple and intuitive user interface.
 Reaction time is measured in milliseconds (ms).
 Average reaction time is calculated and displayed after three attempts.
-Built using HTML, CSS, and JavaScript.
+Built using HTML, CSS, and JavaScript.,d
 How to Play
 The game will display a random delay before the background color changes to green.
 Wait for the screen to turn green, then click as fast as possible.
