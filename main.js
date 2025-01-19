@@ -1,4 +1,4 @@
-const mainMenu = document.querySelector(".main-menu");
+const mainMenu = document.querySelector(".main-menu");   
 const clickableArea = document.querySelector(".clickable-area");
 const message = document.querySelectot(".clickable-area .message");
 const endScreen = document.querySelector(".end-screen");
