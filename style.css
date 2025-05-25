@@ -5,10 +5,11 @@
 body {
    margin: 0;
 }
+
 .reaction-time-container {
     position: relative;
     height: 500px;
-    width: 100%
+    width: 100%;  /* Fixed: added missing semicolon */
     line-height: 1;
 } 
 
@@ -16,25 +17,25 @@ body {
    height: 100%;
    width: 100%;
    cursor: pointer;
-   background:limegreen;
+   background: limegreen;
    display: grid;
    place-items: center;
    font-size: 32px;
-   font-family: "Roboto", sans serif;
+   font-family: "Roboto", sans-serif;  /* Fixed: sans-serif not sans serif */
    color: #fff;
 }
 
-.end-screen
+.end-screen,  /* Fixed: added missing comma */
 .main-menu {
   display: none;
-  position:absolute;
+  position: absolute;
   height: 100%;
   width: 100%;
-  top:0;
+  top: 0;
   left: 0;
   background: #0d3b66;
   color: #fff;
-  font-family: "Roboto", sans serif;
+  font-family: "Roboto", sans-serif;  /* Fixed: sans-serif not sans serif */
   text-align: center;
 }
 
@@ -48,7 +49,7 @@ body {
     cursor: pointer;
 }
 
-reaction-time-container.container {
+.container {  /* Fixed: removed reaction-time-container prefix */
     max-width: 700px;
     padding: 0 32px;
 }
@@ -58,9 +59,9 @@ reaction-time-container.container {
     margin: 8px 0;
 }
 
-reaction-time-container.container p {
+.container p {  /* Fixed: removed reaction-time-container prefix */
     font-size: 20px;
-    line-height:2;
+    line-height: 2;
     font-weight: 800;
     margin: 0;
 }
@@ -74,9 +75,9 @@ reaction-time-container.container p {
     font-weight: 900;
 } 
   
-.end-screen .play-again-btn{
+.end-screen .play-again-btn {
     border: none;
-    background: #faf0faca;
+    background: #faf0ca;  /* Fixed: removed 'ca' suffix - was invalid hex */
     font-size: 20px;
     padding: 8px 32px;
     margin-top: 20px;
