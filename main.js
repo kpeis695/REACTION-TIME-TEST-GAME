@@ -1,12 +1,12 @@
 const mainMenu = document.querySelector(".main-menu");   
 const clickableArea = document.querySelector(".clickable-area");
-const message = document.querySelectot(".clickable-area .message");
+const message = document.querySelector(".clickable-area .message"); // Fixed: querySelector not querySelectot
 const endScreen = document.querySelector(".end-screen");
 const reactionTimeText = document.querySelector(".end-screen .reaction-time-text");
 const playAgainBtn = document.querySelector(".end-screen .play-again-btn");
 
 let timer;
-let greenDisplay;
+let greenDisplayed; // Fixed: was greenDisplay
 let timeNow;
 let waitingForStart;
 let waitingForGreen;
@@ -22,7 +22,7 @@ const init = () => {
 init();
 
 const setGreenColor = () => {
-    clickableArea.style.backgroundColor = "32cd32";
+    clickableArea.style.backgroundColor = "#32cd32"; // Fixed: added # for hex color
     message.innerHTML = "Click Now!";
     message.style.color = "#111";
     greenDisplayed = true;
@@ -33,13 +33,10 @@ const startGame = () => {
     clickableArea.style.backgroundColor = "#c1121f";
     message.innerHTML = "Wait for the Green Color.";
     message.style.color = "#fff";
-
     let randomNumber = Math.floor(Math.random() * 4000 + 3000);
     timer = setTimeout(setGreenColor, randomNumber);
-
-waitingForStart = false;
-waitingForGreen = true;
-
+    waitingForStart = false;
+    waitingForGreen = true;
 };
 
 mainMenu.addEventListener("click", () => {
@@ -50,25 +47,20 @@ mainMenu.addEventListener("click", () => {
 const endGame = () => {
    endScreen.classList.add("active");
    clearTimeout(timer);
-
-   let total = 0
-
+   let total = 0; // Fixed: added semicolon
    scores.forEach((s) => {
        total += s;
-   })
-
+   });
    let averageScore = Math.round(total / scores.length);
-
    reactionTimeText.innerHTML = `${averageScore} ms`;
 };
 
 const displayReactionTime = (rt) => {
-    clickableArea.style.backgroundColor = "faf0ca";
+    clickableArea.style.backgroundColor = "#faf0ca"; // Fixed: added # for hex color
     message.innerHTML = `<div class='reaction-time-text'>${rt} ms</div>Click to continue.`;
     greenDisplayed = false;
     waitingForStart = true;
     scores.push(rt);
-
     if (scores.length >= 3) {
         endGame();
     }
@@ -80,21 +72,19 @@ const displayTooSoon = () => {
     message.style.color = "#111";
     waitingForStart = true;
     clearTimeout(timer);
-}
+}; // Fixed: added semicolon
 
 clickableArea.addEventListener("click", () => {
     if (greenDisplayed) {
-        letclickTime = Date.now();
+        let clickTime = Date.now(); // Fixed: was letclickTime
         let reactionTime = clickTime - timeNow;
         displayReactionTime(reactionTime);
         return;
     }
-
     if (waitingForStart) {
         startGame();
         return;
     }
-
     if (waitingForGreen) {
         displayTooSoon();
     }
@@ -104,4 +94,4 @@ playAgainBtn.addEventListener("click", () => {
     endScreen.classList.remove("active");
     init();
     startGame();
-})
+});
