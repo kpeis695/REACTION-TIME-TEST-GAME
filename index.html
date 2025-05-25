@@ -5,7 +5,105 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reaction Time Test</title>
-    <link rel="stylesheet" href="style.css"> 
+    <style>
+      * {    
+         box-sizing: border-box;
+      }
+
+      body {
+         margin: 0;
+         padding: 0;
+         height: 100vh;
+         overflow: hidden;
+      }
+
+      .clickable-area {
+         position: fixed;
+         top: 0;
+         left: 0;
+         height: 100vh;
+         width: 100vw;
+         cursor: pointer;
+         background: #c1121f;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         font-size: 32px;
+         font-family: "Roboto", sans-serif;
+         color: #fff;
+         z-index: 1;
+      }
+
+      .end-screen,
+      .main-menu {
+        display: none;
+        position: fixed;
+        height: 100vh;
+        width: 100vw;
+        top: 0;
+        left: 0;
+        background: #0d3b66;
+        color: #fff;
+        font-family: "Roboto", sans-serif;
+        text-align: center;
+        z-index: 10;
+      }
+
+      .main-menu.active,
+      .end-screen.active {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .main-menu {
+          cursor: pointer;
+      }
+
+      .container {
+          max-width: 700px;
+          padding: 0 32px;
+      }
+
+      .main-menu h1 {
+          font-size: 70px;
+          margin: 8px 0;
+      }
+
+      .container p {
+          font-size: 20px;
+          line-height: 2;
+          font-weight: 800;
+          margin: 0;
+      }
+
+      .end-screen h1 {
+          font-size: 30px;
+      }
+
+      .reaction-time-text {
+          font-size: 100px;
+          font-weight: 900;
+      } 
+        
+      .end-screen .play-again-btn {
+          border: none;
+          background: #faf0ca;
+          font-size: 20px;
+          padding: 8px 32px;
+          margin-top: 20px;
+          text-transform: uppercase;
+          font-weight: 900;
+          letter-spacing: 4px;
+          cursor: pointer;
+          color: #111;
+      }
+
+      .message {
+          font-size: 32px;
+          color: #fff;
+      }
+    </style>
   </head>
   <body>
       <div class="end-screen">
@@ -28,6 +126,105 @@
         <div class="message">Click Now!</div>
       </div>
       
-    <script src="main.js"></script> 
+    <script>
+      const mainMenu = document.querySelector(".main-menu");   
+      const clickableArea = document.querySelector(".clickable-area");
+      const message = document.querySelector(".clickable-area .message");
+      const endScreen = document.querySelector(".end-screen");
+      const reactionTimeText = document.querySelector(".end-screen .reaction-time-text");
+      const playAgainBtn = document.querySelector(".end-screen .play-again-btn");
+
+      let timer;
+      let greenDisplayed;
+      let timeNow;
+      let waitingForStart;
+      let waitingForGreen;
+      let scores;
+        
+      const init = () => {
+          greenDisplayed = false;
+          waitingForStart = false;
+          waitingForGreen = false;
+          scores = [];
+      };
+
+      init();
+
+      const setGreenColor = () => {
+          clickableArea.style.backgroundColor = "#32cd32";
+          message.innerHTML = "Click Now!";
+          message.style.color = "#111";
+          greenDisplayed = true;
+          timeNow = Date.now();
+      };
+
+      const startGame = () => {
+          clickableArea.style.backgroundColor = "#c1121f";
+          message.innerHTML = "Wait for the Green Color.";
+          message.style.color = "#fff";
+          let randomNumber = Math.floor(Math.random() * 4000 + 3000);
+          timer = setTimeout(setGreenColor, randomNumber);
+          waitingForStart = false;
+          waitingForGreen = true;
+      };
+
+      mainMenu.addEventListener("click", () => {
+          mainMenu.classList.remove("active");
+          startGame();
+      });
+
+      const endGame = () => {
+         endScreen.classList.add("active");
+         clearTimeout(timer);
+         let total = 0;
+         scores.forEach((s) => {
+             total += s;
+         });
+         let averageScore = Math.round(total / scores.length);
+         reactionTimeText.innerHTML = `${averageScore} ms`;
+      };
+
+      const displayReactionTime = (rt) => {
+          clickableArea.style.backgroundColor = "#faf0ca";
+          message.innerHTML = `<div class='reaction-time-text'>${rt} ms</div>Click to continue.`;
+          message.style.color = "#111";
+          greenDisplayed = false;
+          waitingForStart = true;
+          scores.push(rt);
+          if (scores.length >= 3) {
+              endGame();
+          }
+      };
+
+      const displayTooSoon = () => {
+          clickableArea.style.backgroundColor = "#faf0ca";
+          message.innerHTML = "Too Soon. Click to continue";
+          message.style.color = "#111";
+          waitingForStart = true;
+          clearTimeout(timer);
+      };
+
+      clickableArea.addEventListener("click", () => {
+          if (greenDisplayed) {
+              let clickTime = Date.now();
+              let reactionTime = clickTime - timeNow;
+              displayReactionTime(reactionTime);
+              return;
+          }
+          if (waitingForStart) {
+              startGame();
+              return;
+          }
+          if (waitingForGreen) {
+              displayTooSoon();
+          }
+      });
+
+      playAgainBtn.addEventListener("click", () => {
+          endScreen.classList.remove("active");
+          init();
+          startGame();
+      });
+    </script>
   </body>
 </html>
